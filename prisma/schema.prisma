@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Using data from https://github.com/kevinroberts/city-timezones
+model City {
+  id            Int @id @default(autoincrement())
+  city          String @db.VarChar(191)
+  cityAscii     String @db.VarChar(191) @map("city_ascii")
+  lat           Float
+  lng           Float
+  pop           Float
+  country       String @db.VarChar(191)
+  iso2          String? @db.VarChar(191)
+  iso3          String? @db.VarChar(191)
+  province      String? @db.VarChar(191)
+  exactCity     String? @db.VarChar(191) @map("exact_city")
+  exactProvince String? @db.VarChar(191) @map("exact_province")
+  stateAnsi     String? @db.VarChar(191) @map("state_ansi")
+  timezone      String? @db.VarChar(191)
+  users         User[]
+
+  @@map("cities")
+}
+
+
+model User {
+  id        Int @id @default(autoincrement())
+  city      City @relation(fields: [cityId], references: [id])
+  cityId    Int @map("city_id")
+  email     String @db.VarChar(191)
+  firstName String @db.VarChar(191) @map("first_name")
+  lastName  String @db.VarChar(191) @map("last_name")
+  birthDate DateTime @map("birth_date")
+
+  @@map("users")
+}
