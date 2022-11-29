@@ -1,0 +1,4 @@
+APP_MODE=development
+APP_PORT=3000
+
+DATABASE_URL="mysql://root:password@localhost:3309/message?connection_limit=40"

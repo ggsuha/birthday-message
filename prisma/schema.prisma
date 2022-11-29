@@ -39,7 +39,7 @@ model User {
   email     String @db.VarChar(191)
   firstName String @db.VarChar(191) @map("first_name")
   lastName  String @db.VarChar(191) @map("last_name")
-  birthDate DateTime @map("birth_date")
+  birthDate DateTime @map("birth_date") @db.Date
 
   @@map("users")
 }
