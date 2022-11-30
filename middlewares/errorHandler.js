@@ -1,29 +1,23 @@
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
-    data: {
-      message: err.message,
-      stack: err.stack,
-    },
-    pagination: null,
+    status: err.status,
+    message: err.message,
+    stack: err.stack,
   });
 };
 
 const sendErrorProd = (err, res) => {
   if (err.isOperational) {
     res.status(err.statusCode).json({
-      data: {
-        message: err.message,
-      },
-      pagination: null,
+      status: err.status,
+      message: err.message,
     });
   } else {
     console.error("ERROR:", err);
 
     res.status(500).json({
-      data: {
-        message: "Something went very wrong!",
-      },
-      pagination: null,
+      status: "error",
+      message: "Something went very wrong!",
     });
   }
 };

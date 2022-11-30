@@ -3,6 +3,18 @@ import moment from "moment-timezone";
 
 const prisma = new PrismaClient();
 
+export async function isEmailTaken(email) {
+  const user = await prisma.user.findFirst({
+    where: { email: email },
+  });
+
+  if (!user) {
+    return false;
+  }
+
+  return user;
+}
+
 export async function create(body) {
   return await prisma.user.create({
     data: {
@@ -20,7 +32,6 @@ export async function create(body) {
 }
 
 export async function update(id, body) {
-  console.log(body);
   return await prisma.user.update({
     where: {
       id: parseInt(id),
