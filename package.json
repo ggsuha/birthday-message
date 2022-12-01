@@ -7,7 +7,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "mocha ./tests/*.spec.js",
-    "pretest": "npx prisma migrate reset --force"
+    "pretest": "npx prisma migrate reset --force",
+    "users": "node ./prisma/generateUsers.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
@@ -25,6 +26,7 @@
     "moment-timezone": "^0.5.39",
     "node-cache": "^5.1.2",
     "node-schedule": "^2.1.0",
+    "sinon": "^15.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

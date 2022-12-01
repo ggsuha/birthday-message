@@ -35,13 +35,13 @@ Run
 npm run test
 ```
 
-or
+Database migration reset will start and the testing begins after migration and seeding process finished. Currently, the test only cover API (job schedule testing not implemented, yet). We need manually test the job by running bulking insert users with command
 
 ```
-npm test
+npm run users
 ```
 
-Database migration reset will start and the testing begins after migration and seeding process finished. Currently, the test only cover API (job schedule testing not included, yet).
+After that, run server and we will get log from resend message job scheduler on each minute, while send message job scheduler each hour.
 
 ## API Docs
 
