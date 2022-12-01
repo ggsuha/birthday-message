@@ -1,7 +1,7 @@
 {
   "name": "birthday-message",
   "version": "1.0.0",
-  "description": "Backend Developer - Digital Envision Assessment Test",
+  "description": "Backend Developer - Digital Envision (Upscalix) Assessment Test",
   "main": "app.js",
   "type": "module",
   "scripts": {
