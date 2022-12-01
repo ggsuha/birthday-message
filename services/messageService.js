@@ -41,7 +41,6 @@ export async function sendBirthdayMessage() {
   const users = await getUsers();
 
   for (const user of users) {
-    console.log(user);
     const message = await isExist(user.id);
     if (message) {
       console.log(`No action: Message already sent to ${user.email}`);
@@ -77,9 +76,12 @@ export async function sendMessage(user, message) {
   })
     .then(async (res) => {
       input.sentAt = moment.parseZone().toDate();
+      console.log(`[Info] Message succesfully sent to ${user.email}`);
     })
     .catch(async (err) => {
-      console.log(err.response.data);
+      // console.log(err);
+
+      console.log(`[Warning] Message sending to ${user.email} has been fail`);
     })
     .finally(async () => {
       await prisma.message.create({
@@ -101,7 +103,7 @@ export async function resendMessage() {
       },
     })
       .then(async (res) => {
-        await prisma.message.updateMany({
+        const updated = await prisma.message.updateMany({
           data: {
             sentAt: moment.parseZone().toDate(),
             version: {
@@ -114,9 +116,28 @@ export async function resendMessage() {
             version: message.version,
           },
         });
+
+        console.log(
+          `[Info] Message succesfully resent to ${message.user.email}`
+        );
       })
       .catch(async (err) => {
-        console.log(err);
+        // console.log(err);
+
+        await prisma.message.updateMany({
+          data: {
+            version: {
+              increment: 1,
+            },
+          },
+          where: {
+            id: message.id,
+            sentAt: null,
+            version: message.version,
+          },
+        });
+
+        console.log(`[Warning] Message cannot resent to ${message.user.email}`);
       });
   }
 

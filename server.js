@@ -24,3 +24,5 @@ const everyMinute = "* * * * *";
 schedule.scheduleJob(everyMinute, function () {
   messageService.resendMessage();
 });
+
+export default app;
