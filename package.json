@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha ./tests/*.spec.js",
+    "test": "mocha ./tests/*.spec.js --exit",
     "pretest": "npx prisma migrate reset --force",
     "users": "node ./prisma/generateUsers.js"
   },
