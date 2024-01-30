@@ -27,7 +27,7 @@
     "node-cache": "^5.1.2",
     "node-schedule": "^2.1.0",
     "sinon": "^15.0.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "chai": "^4.3.7",
